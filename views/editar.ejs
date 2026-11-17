@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body>
+    <h1>Cadastro de pacientes</h1>
+    <h2>Editar paciente #<%= p.id %></h2>
+
+    <form action="/itens/<%= p.id %>/editar" method="POST">
+      <label>Nome completo
+        <input type="text" name="nome" value="<%= p.nome %>" required>
+      </label>
+      <label>Gênero
+        <select name="genero" required>
+          <option <%= p.genero === 'Feminino' ? 'selected' : '' %>>Feminino</option>
+          <option <%= p.genero === 'Masculino' ? 'selected' : '' %>>Masculino</option>
+          <option <%= p.genero === 'Outro' ? 'selected' : '' %>>Outro</option>
+        </select>
+      </label>
+      <label>Data de nascimento
+        <input type="date" name="data_nascimento"
+               value="<%= new Date(p.data_nascimento).toLocaleDateString('sv-SE') %>" required>
+      </label>
+      <label>CPF
+        <input type="text" name="cpf" maxlength="14"
+               value="<%= p.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4') %>" required>
+      </label>
+      <label>Telefone
+        <input type="text" name="telefone" maxlength="15"
+               value="<%= p.telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') %>" required>
+      </label>
+      <label>E-mail
+        <input type="email" name="email" value="<%= p.email %>" required>
+      </label>
+      <button type="submit">Salvar alterações</button>
+      <a class="btn-link" href="/#pacientes">Cancelar</a>
+    </form>
+  </body>
+</html>

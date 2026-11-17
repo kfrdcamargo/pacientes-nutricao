@@ -1,0 +1,174 @@
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f5f9f2;
+  color: #1d2e25;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+h1 {
+  color: #1e5b3f;
+  border-bottom: 4px solid #f28c28;
+  padding-bottom: 8px;
+}
+
+h2 {
+  color: #2f7d4f;
+  margin-top: 32px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid #dce7dd;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+input,
+select {
+  padding: 8px 10px;
+  border: 1px solid #c5d6c9;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #f28c28;
+  border-color: #2f7d4f;
+}
+
+button {
+  grid-column: 1 / -1;
+  padding: 10px;
+  background: #f28c28;
+  color: #2b1700;
+  border: 0;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #e07b17;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid #dce7dd;
+}
+
+th {
+  background: #2f7d4f;
+  color: #ffffff;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 10px 12px;
+}
+
+tr:nth-child(even) td {
+  background: #f1f7ee;
+}
+
+/* ---------- Abas ---------- */
+.abas {
+  display: flex;
+  gap: 4px;
+  margin-top: 24px;
+  border-bottom: 2px solid #dce7dd;
+}
+
+.aba {
+  background: none;
+  color: #5f7568;
+  padding: 10px 20px;
+  border: 0;
+  border-bottom: 4px solid transparent;
+  border-radius: 0;
+  margin-bottom: -2px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.aba:hover {
+  background: none;
+  color: #1e5b3f;
+}
+
+.aba.ativa {
+  color: #1e5b3f;
+  border-bottom-color: #f28c28;
+}
+
+/* ---------- Botões Editar e Excluir ---------- */
+.form-acao {
+  display: inline;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+.btn-editar {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 6px 12px;
+  background: #ffffff;
+  color: #1e5b3f;
+  border: 1px solid #b9d3c2;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.btn-editar:hover {
+  background: #eef5ea;
+}
+
+.btn-excluir {
+  padding: 6px 12px;
+  background: #ffffff;
+  color: #b23a2a;
+  border: 1px solid #e3b8b1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-excluir:hover {
+  background: #fbeeec;
+}
+
+.btn-link {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #1e5b3f;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px;
+}
+
+/* ---------- Celular ---------- */
+@media (max-width: 640px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+}

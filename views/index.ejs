@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body>
+    <h1>Cadastro de pacientes</h1>
+
+    <nav class="abas">
+      <button type="button" class="aba ativa" data-aba="novo">Novo paciente</button>
+      <button type="button" class="aba" data-aba="pacientes">Pacientes (<%= pacientes.length %>)</button>
+    </nav>
+
+    <section id="aba-novo" class="painel">
+      <h2>Novo paciente</h2>
+      <form action="/itens" method="POST">
+        <label>Nome completo
+          <input type="text" name="nome" required>
+        </label>
+        <label>Gênero
+          <select name="genero" required>
+            <option value="">Selecione</option>
+            <option>Feminino</option>
+            <option>Masculino</option>
+            <option>Outro</option>
+          </select>
+        </label>
+        <label>Data de nascimento
+          <input type="date" name="data_nascimento" required>
+        </label>
+        <label>CPF
+          <input type="text" name="cpf" maxlength="14" placeholder="000.000.000-00" required>
+        </label>
+        <label>Telefone
+          <input type="text" name="telefone" maxlength="15" placeholder="(14) 99999-9999" required>
+        </label>
+        <label>E-mail
+          <input type="email" name="email" required>
+        </label>
+        <button type="submit">Salvar paciente</button>
+      </form>
+    </section>
+
+    <section id="aba-pacientes" class="painel" hidden>
+      <h2>Pacientes cadastrados</h2>
+      <% if (pacientes.length === 0) { %>
+        <p>Nenhum paciente cadastrado ainda.</p>
+      <% } else { %>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Gênero</th>
+              <th>Nascimento</th>
+              <th>CPF</th>
+              <th>Telefone</th>
+              <th>E-mail</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% pacientes.forEach(function (p) { %>
+              <tr>
+                <td><%= p.id %></td>
+                <td><%= p.nome %></td>
+                <td><%= p.genero %></td>
+                <td><%= new Date(p.data_nascimento).toLocaleDateString('pt-BR') %></td>
+                <td><%= p.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4') %></td>
+                <td><%= p.telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') %></td>
+                <td><%= p.email %></td>
+                <td>
+                  <a class="btn-editar" href="/itens/<%= p.id %>/editar">Editar</a>
+                  <form class="form-acao" action="/itens/<%= p.id %>/excluir" method="POST"
+                        onsubmit="return confirm('Excluir este paciente?');">
+                    <button type="submit" class="btn-excluir">Excluir</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } %>
+    </section>
+
+    <script>
+      function mostrarAba(nome) {
+        document.querySelectorAll('.painel').forEach(function (p) {
+          p.hidden = p.id !== 'aba-' + nome;
+        });
+        document.querySelectorAll('.aba').forEach(function (b) {
+          b.classList.toggle('ativa', b.dataset.aba === nome);
+        });
+      }
+      document.querySelectorAll('.aba').forEach(function (b) {
+        b.addEventListener('click', function () { mostrarAba(b.dataset.aba); });
+      });
+      if (location.hash === '#pacientes') mostrarAba('pacientes');
+    </script>
+  </body>
+</html>
